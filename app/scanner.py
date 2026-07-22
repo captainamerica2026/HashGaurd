@@ -1,36 +1,35 @@
-# HashGuard Device Scanner
+# HashGuard Master Scanner
+
+from core.battery import BatteryScanner
+from core.hardware import HardwareScanner
 
 
 class Scanner:
 
 
+    def __init__(self):
+
+        self.battery = BatteryScanner()
+        self.hardware = HardwareScanner()
+
+
+
     def scan(self):
 
-        return {
+        print("HashGuard Deep Scan Started")
 
-            "Battery":
-            {
-                "health": "GOOD",
-                "level": "85%"
-            },
+        result = {
 
-
-            "Thermal":
-            {
-                "temperature": "31°C",
-                "status": "NORMAL"
-            },
+            "battery":
+            self.battery.scan(),
 
 
-            "Hardware":
-            {
-                "status": "GOOD"
-            },
-
-
-            "Storage":
-            {
-                "status": "GOOD"
-            }
+            "hardware":
+            self.hardware.scan()
 
         }
+
+
+        print("Scan Complete")
+
+        return result
