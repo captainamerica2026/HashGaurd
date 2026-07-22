@@ -71,9 +71,15 @@ class HashGuard(MDApp):
 
     def build(self):
 
-        self.theme_cls.theme_style="Dark"
+    self.theme_cls.theme_style="Dark"
 
-        return Builder.load_string(KV)
+    screen = Builder.load_string(KV)
+
+    radar = RadarScreen()
+
+    screen.add_widget(radar)
+
+    return screen
 
 
 
