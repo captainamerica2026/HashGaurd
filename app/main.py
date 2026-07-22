@@ -1,3 +1,4 @@
+from ui.radar_screen import RadarScreen
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
