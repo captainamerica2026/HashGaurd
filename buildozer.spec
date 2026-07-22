@@ -3,11 +3,9 @@
 title = HashGuard
 package.name = hashguard
 package.domain = org.hashguard
-
+version = 0.1
 source.dir = app
 source.include_exts = py,png,jpg,jpeg,kv,json,txt
-
-version = 1.0
 
 requirements = python3,kivy,kivymd,psutil
 
