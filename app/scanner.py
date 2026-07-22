@@ -12,7 +12,7 @@ class Scanner:
 
         self.battery = BatteryScanner()
         self.hardware = HardwareScanner()
-
+        self.thermal = ThermalScanner()
 
 
     def scan(self):
@@ -21,13 +21,15 @@ class Scanner:
 
         result = {
 
-            "battery":
-            self.battery.scan(),
+    "battery":
+    self.battery.scan(),
 
+    "hardware":
+    self.hardware.scan(),
 
-            "hardware":
-            self.hardware.scan()
-
+    "thermal":
+    self.thermal.scan()
+            
         }
 
 
