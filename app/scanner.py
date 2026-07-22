@@ -1,5 +1,6 @@
 # HashGuard Master Scanner
 
+from core.thermal import ThermalScanner
 from core.battery import BatteryScanner
 from core.hardware import HardwareScanner
 
