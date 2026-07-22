@@ -1,2 +1,5 @@
 kivy
 kivymd
+psutil
+plyer
+pyjnius 
