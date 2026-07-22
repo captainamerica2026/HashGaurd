@@ -1,19 +1,38 @@
-# HashGuard
-# Device Health Intelligence System
+# HashGuard Main Interface
 
-class HashGuard:
+from ui.dashboard import Dashboard
+from ui.radar import RadarScanner
+from ui.report import Report
+
+
+class HashGuardApp:
 
     def __init__(self):
-        self.name = "HashGuard"
-        self.version = "0.1"
+        self.dashboard = Dashboard()
+        self.radar = RadarScanner()
+        self.report = Report()
 
 
     def start(self):
-        print("🛡 HashGuard Started")
-        print("Device scan system ready")
+
+        print("🛡 HASHGUARD")
+        print("Device Health Intelligence System")
+        print("--------------------------------")
+
+        self.radar.start()
+
+        self.radar.scan_modules()
+
+        result = self.report.generate(87)
+
+        print("\nDEVICE REPORT")
+        print("Score:", result["score"])
+        print("Status:", result["status"])
+
 
 
 if __name__ == "__main__":
 
-    app = HashGuard()
+    app = HashGuardApp()
+
     app.start()
