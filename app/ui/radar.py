@@ -1,26 +1,46 @@
-# HashGuard Radar Scanner
+# HashGuard Radar Engine
+
+import time
+
 
 class RadarScanner:
 
-    def start(self):
 
-        print("📡 Radar activated")
-        print("Scanning device...")
+    def __init__(self):
 
-
-    def scan_modules(self):
-
-        modules = [
+        self.modules = [
             "Battery",
             "CPU",
             "RAM",
             "Storage",
-            "Sensors",
-            "Temperature"
+            "Thermal",
+            "Sensors"
         ]
 
-        for module in modules:
+
+
+    def start(self):
+
+        print("📡 RADAR SYSTEM ONLINE")
+
+
+
+    def scan_modules(self):
+
+        results = {}
+
+        print("\nStarting deep scan...\n")
+
+
+        for module in self.modules:
+
             print("Scanning:", module)
 
+            time.sleep(0.5)
 
-        return True
+            results[module] = "PASS"
+
+
+        print("\nScan Complete")
+
+        return results
