@@ -1,5 +1,6 @@
 # HashGuard Master Scanner
 
+from core.android_device import AndroidDevice
 from core.sensors import SensorScanner 
 from core.thermal import ThermalScanner
 from core.battery import BatteryScanner
@@ -15,7 +16,8 @@ class Scanner:
         self.hardware = HardwareScanner()
         self.thermal = ThermalScanner()
         self.sensors = SensorScanner()
-
+        self.device = AndroidDevice()
+    
     def scan(self):
 
         print("HashGuard Deep Scan Started")
@@ -33,6 +35,9 @@ class Scanner:
 
       "sensors":
     self.sensors.scan()
+                      
+      "device":
+    self.device.scan()
         }
 
 
