@@ -130,9 +130,31 @@ class HashGuard(MDApp):
 
     def start_scan(self):
 
-        self.root.ids.status.text = (
-            "📡 Scanning..."
-        )
+    from scanner import Scanner
+    from ui.report import Report
+
+
+    self.root.ids.status.text = (
+        "📡 Deep Scan Running..."
+    )
+
+
+    scanner = Scanner()
+
+    data = scanner.scan()
+
+
+    report = Report()
+
+    result = report.generate(data)
+
+
+    self.root.ids.status.text = (
+        "🛡 Score: "
+        + str(result["score"])
+        + "/100  "
+        + result["status"]
+    )
 
 
 HashGuard().run()
