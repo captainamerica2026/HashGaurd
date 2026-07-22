@@ -1,6 +1,9 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.uix.floatlayout import FloatLayout
 from kivy.animation import Animation
+
+from ui.radar import Radar
 
 
 KV = """
@@ -10,11 +13,7 @@ MDScreen:
     md_bg_color: 0.02,0.02,0.03,1
 
 
-    MDBoxLayout:
-
-        orientation: "vertical"
-        padding: "25dp"
-        spacing: "20dp"
+    FloatLayout:
 
 
         MDLabel:
@@ -23,93 +22,88 @@ MDScreen:
 
             halign: "center"
 
-            font_style: "H3"
+            pos_hint:
+                {"center_y":0.9}
 
-            theme_text_color: "Custom"
+            font_style:
+                "H3"
 
-            text_color: 0,0.8,1,1
+            theme_text_color:
+                "Custom"
+
+            text_color:
+                0,0.8,1,1
 
 
 
         MDLabel:
 
-            text: "Device Health Intelligence"
+            text:
+                "Device Health Intelligence"
 
-            halign: "center"
-
-
-
-        MDCard:
-
-            size_hint: .8,.25
+            halign:
+                "center"
 
             pos_hint:
-                {"center_x":0.5}
-
-            md_bg_color:
-                0.05,0.05,0.08,1
-
-
-            MDLabel:
-
-                text:
-
-                    "DEVICE SCORE\\n\\n87 / 100"
-
-                halign:
-
-                    "center"
-
-                font_style:
-
-                    "H4"
+                {"center_y":0.82}
 
 
 
-        Widget:
+        FloatLayout:
+
+            id:
+                radar_area
+
+            size_hint:
+                1,.45
+
+            pos_hint:
+                {"center_y":0.52}
 
 
 
         MDRaisedButton:
 
-            id: radar_button
+            id:
+                scan_button
+
 
             text:
-
-                "📡\\nSCAN"
-
-            font_size:
-
-                "28sp"
+                "📡 SCAN"
 
 
             size_hint:
-
-                .5,.4
+                .4,.12
 
 
             pos_hint:
 
-                {"center_x":0.5}
+                {"center_x":0.5,"center_y":0.15}
 
 
             on_release:
 
-                app.scan()
+                app.start_scan()
 
 
 
         MDLabel:
 
-            id: status
+            id:
+                status
+
 
             text:
-
                 "System Ready"
 
-            halign:
 
+            halign:
                 "center"
+
+
+            pos_hint:
+
+                {"center_y":0.05}
 
 
 """
@@ -122,33 +116,23 @@ class HashGuard(MDApp):
 
         self.theme_cls.theme_style="Dark"
 
-        return Builder.load_string(KV)
+        screen = Builder.load_string(KV)
 
+        self.radar = Radar()
 
-
-    def scan(self):
-
-        btn=self.root.ids.radar_button
-
-        anim=Animation(
-            opacity=.3,
-            duration=.5
+        screen.ids.radar_area.add_widget(
+            self.radar
         )
 
-        anim += Animation(
-            opacity=1,
-            duration=.5
-        )
+        return screen
 
-        anim.repeat=True
 
-        anim.start(btn)
 
+    def start_scan(self):
 
         self.root.ids.status.text = (
-            "📡 Scanning Device..."
+            "📡 Scanning..."
         )
-
 
 
 HashGuard().run()
