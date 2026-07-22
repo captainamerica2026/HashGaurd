@@ -21,32 +21,25 @@ jobs:
         python-version: "3.10"
 
 
-    - name: Install Java and Tools
+    - name: Install Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: "17"
+
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+
+    - name: Install Android packages
       run: |
 
-        sudo apt update
+        yes | sdkmanager --licenses
 
-        sudo apt install -y \
-        openjdk-17-jdk \
-        build-essential \
-        git \
-        zip \
-        unzip \
-        autoconf \
-        libtool \
-        pkg-config
-
-
-    - name: Install Android SDK Tools
-      run: |
-
-        yes | sdkmanager --licenses || true
-
-        sdkmanager "platform-tools"
-
-        sdkmanager "platforms;android-33"
-
-        sdkmanager "build-tools;33.0.2"
+        sdkmanager "platform-tools" \
+        "platforms;android-33" \
+        "build-tools;33.0.2"
 
 
     - name: Install Buildozer
