@@ -1,14 +1,36 @@
+# HashGuard Device Scanner
+
+
 class Scanner:
+
 
     def scan(self):
 
-        print("Starting scan...")
+        return {
 
-        results = {
-            "battery": "GOOD",
-            "hardware": "GOOD",
-            "storage": "GOOD",
-            "thermal": "NORMAL"
+            "Battery":
+            {
+                "health": "GOOD",
+                "level": "85%"
+            },
+
+
+            "Thermal":
+            {
+                "temperature": "31°C",
+                "status": "NORMAL"
+            },
+
+
+            "Hardware":
+            {
+                "status": "GOOD"
+            },
+
+
+            "Storage":
+            {
+                "status": "GOOD"
+            }
+
         }
-
-        return results
