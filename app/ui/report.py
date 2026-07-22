@@ -1,4 +1,4 @@
-# HashGuard Health Report
+# HashGuard Smart Health Report
 
 
 class Report:
@@ -6,39 +6,72 @@ class Report:
 
     def generate(self, data):
 
-        score = 0
+        score = 100
 
 
-        if data["battery"]["health"] == "GOOD":
-            score += 30
+        # Battery check
+        battery = data["battery"]
+
+        if battery["status"] != "Detected":
+            score -= 20
 
 
-        if data["hardware"]["storage"] == "Healthy":
-            score += 30
+
+        # Storage check
+        storage = data["hardware"]["storage_used"]
+
+        if storage.endswith("%"):
+
+            used = int(
+                storage.replace("%","")
+            )
+
+            if used > 90:
+                score -= 20
+
+            elif used > 75:
+                score -= 10
 
 
-        if data["thermal"]["status"] == "NORMAL":
-            score += 30
+
+        # Thermal check
+        if data["thermal"]["status"] != "NORMAL":
+
+            score -= 15
 
 
-        score += 10
+
+        # Sensors check
+        if len(data["sensors"]) < 3:
+
+            score -= 10
+
 
 
         if score >= 90:
+
             status = "Excellent"
 
         elif score >= 70:
+
             status = "Good"
 
+        elif score >= 50:
+
+            status = "Warning"
+
         else:
-            status = "Needs Attention"
+
+            status = "Critical"
 
 
 
         return {
 
             "score": score,
+
             "status": status,
+
             "details": data
 
         }
